@@ -308,8 +308,10 @@
         .featured-sub-group { display: flex; flex-direction: column; gap: 24px; }
         .featured-sub-card { height: 198px; }
 
-        .featured-card-item:hover .diagonal-stripe-bg { transform: scale(1.05); }
-        .featured-card-item:hover { border-color: var(--border-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .featured-card-item:hover .diagonal-stripe-bg,
+        .scroll-card:hover .diagonal-stripe-bg { transform: scale(1.05); }
+        .featured-card-item:hover,
+        .scroll-card:hover { border-color: var(--border-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
 
         .featured-card-content {
             position: absolute;
@@ -346,6 +348,44 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+
+        /* 02 SELECTED WORK CARDS STYLES */
+        .scroll-card {
+            flex: 0 0 320px;
+            scroll-snap-align: start;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .card-img-wrapper {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-excerpt {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         .card-media-bar {
@@ -493,15 +533,16 @@
             </div>
 
             <div class="horizontal-scroll-wrapper">
-                <!-- 第一組展示：已嵌入 Tasteme 文章與音檔路徑 -->
+                <!-- 第一組展示 -->
                 <div class="featured-group">
+                    <!-- Tasteme 文章與音檔路徑卡片 -->
                     <div class="featured-card-item featured-main-card js-article-card" 
                          data-title="Tasteme 讓環保和盈利成為雙贏：專訪惜食平台營運哲學"
                          data-intro="從剩餘甜甜圈啟發的商業轉機！Tasteme 推出『良食福袋』模式，結合彈性折扣與APP應用，完美解決餐飲業剩食痛點，創造環境永續與企業獲利的雙贏方程式"
                          data-time="6 Min." 
                          data-comments="48"
                          data-audio="audio/tasteme-audio.mp3"
-                         data-body="<h3>創立契機：翻轉剩食問題的商業思維</h3><p>大學唸物理系的葉柏軍，前往美國攻讀碩士期間，常看到當地甜甜圈及Bagel店在打烊時，將賣剩的麵包直接丟棄，而不管這些食物仍是新鮮、可食用的。大量的製造和丟棄，在葉柏軍心裡留下深刻印象，返台工作數年後，葉柏軍面臨到職涯轉換，麵包店丟棄食物的景象，又重返到他的腦海，終於下定決心創業，改變台灣現有的食物浪費問題。</p><p>『惜食』的出發點是環保，且能有效利用社會和環境資源，早在歐美地區行之有年，例如2015年在丹麥成立的Too Good To Go，讓消費者能用3到5歐元（約3.2到5.3美元）的價格，到餐廳或飲食店帶走價值三倍的食物，成功地激起當地消費者熱愛環保的善心，並順利進軍歐洲以外的加拿大及美國市場。</p><p>參考了國外範例，葉柏軍抱持著讓更多餐飲業者理解、甚至一同支持食物循環經濟的理念，親自到台北市最繁華的台北車站和西門町區域，拜訪了一百多家餐廳業者，向老闆們一一探討餐廳剩食問題。</p><p>藉由親自走訪，瞭解到解決食物浪費刻不容緩後，為了讓食物流向更好的去處，葉柏軍決定打造出食物媒合平臺，Tasteme於焉誕生。</p><h3>核心機制：良食福袋與雙贏商業模式</h3><p>過往在台灣，無論是餐廳、烘培坊等餐飲業者，幾乎都將熟食及剩餘食物，視為店家的必要成本，甚至是經營過程裡必要的沉沒成本。</p><p>所謂的沉沒成本（Sunk Cost），是指經濟學或商業模式裡已付出且不可回收的成本，比方說一間麵包坊，不管能不能賣完，每天都需要出爐數十個甚至上百個新鮮麵包；而有中央廚房的連鎖業者，更可能需要每天製造出數百個香噴噴的麵包。</p><p>這些食物並不一定能當天完售，很多時候會產生『剩食』，即期食品、難以保鮮的食物和生鮮熟食，又比食物原料更具急迫性，需要人們去解決。根據聯合國組織所做的調查，光是在擁有2300萬人口的台灣，每年就產生無數的糧食損耗，像是在2013年時，台灣人浪費了367.7萬噸的糧食，若以90cm的廚餘桶裝起，台灣一天丟棄的廚餘桶，可以堆3700棟101大樓。</p><p>即使如此，台灣政府和民間團體乃至企業，仍多以公益層面處理『剩食』，形成了受眾較小、無法盈利的局面，因為會接受熟食的機構，多屬於食物銀行、街友及慈善團體等，雖然能減少廚餘產生，但無論是從受眾基數或循環層面來講，都不能發揮出最大的效果。</p><p>葉柏軍指出，這種由餐飲、烘培業者間接導致的『剩食』問題，應同樣藉由商業模式解決，讓一般人也有機會接觸到『剩食』，才能有效解決糧食損耗議題；當店家的沉沒成本不再沈默，而是以低廉的價格銷售，讓口袋較淺的學生、環保人士乃至一般大眾都能購買，才有機會幫助到更多的人，形成善與美的循環。</p><h3>榮獲德國iF SOCIAL IMPACT PRIZE肯定</h3><p>相較於綠色永續概念發達的歐洲，亞洲地區像是香港、新加坡和台灣，都越來越注重環境議題和糧食耗損問題，『節約糧食』的理念早在一般人心中萌芽，像是在外食盛行的台灣，許多年輕人喜歡自備餐具和吸管、環保杯，走到哪裡都要用自己的餐具，並拒絕使用保麗龍、一次性塑膠餐具和紙杯碗，這也是Tasteme APP，將平臺介面和品牌形象，都打造得較為年輕化的原因。</p><p>這樣的運作模式，除了幫助餐飲業者藉由『惜食』來回收成本、打造出良好的社會形象，甚至能促進店家來客率，或促進試吃、嚐鮮的效果，讓更多消費者熟悉自家餐飲品牌。</p><p>對於消費者來說，經由Tasteme下單不僅輕鬆又省錢，還能兼顧環保理念，解決掉糧食損耗問題，讓食物不再被回收和掩埋，自然能減少甲烷等溫室氣體排放，對我們的環境更好。</p><p>而對於Tasteme來説，藉由和美食業者的合作，自然能長久順利地將平臺營運下去；這種四方共立的模式，能幫助彼此互利互惠，而非互相抗衡，更符合永續經營的理念。</p><p>儘管出發點是環保，但在問到Tasteme創立至今，曾遇過哪些棘手問題或挑戰時，葉柏軍也坦言，這類食物循環平臺在台灣沒人做過，因此遇到過不少挑戰。</p><p>比方Tasteme主要做惜食共享，代表店家有多餘食物剩下才能販售，而Tasteme平臺上的『預訂』功能，在剛開始常受到消費者誤解，因為在店家剛好沒有剩餘食物時，自然無法提供販售，消費者也就無法拿到食物。</p><p>所幸在經過推廣後，顧客漸漸能理解平臺用意。另一方面，因為Tasteme屬於嶄新的商業模式，要說服自助餐、烘培業等傳統餐飲業者加入，也耗費了好一番工夫；Tasteme所能做的，就是盡心推廣、說服志同道合的業者加入，讓剩食有更好的解決出路，並加強擴大其社會影響力。</p><p>關於食物保鮮問題，葉柏軍認為，Tasteme屬於提供『剩食』的平臺，許多消費者會考量到食物是否新鮮；事實上，Tasteme已成交超過四萬筆，且採取消費者親自到店取餐的模式，也就是說，店家必需當著顧客的面交出食物，自然杜絕了販售不新鮮或有疑慮食物的問題，而Tasteme也經過嚴格篩選，精心挑選具有商譽或品質的好店家，讓顧客能更放心地享用美食。</p><p>除此之外，Tasteme採取儲值代幣再消費的結帳方式，也讓不少消費者產生疑惑，認為不如直接刷信用卡來得方便。對此葉柏軍解釋，Tasteme主要做食物媒合，也因為預訂功能可能導致退款，一般信用卡在結帳時，需要連結到消費平台和銀行系統，容易產生風險；但透過T-coin儲值，即便後續退款也是在Tasteme平臺的封閉系統運作，代表消費者僅會在購買儲值代幣時提供信用卡資訊，相對來講更為安全。</p>">
+                         data-body="<h3>創立契機：翻轉剩食問題的商業思維</h3><p>大學唸物理系的葉柏軍，前往美國攻讀碩士期間，常看到當地甜甜圈及Bagel店在打烊時，將賣剩的麵包直接丟棄，而不管這些食物仍是新鮮、可食用的。大量的製造和丟棄，在葉柏軍心裡留下深刻印象，返台工作數年後，葉柏軍面臨到職涯轉換，麵包店丟棄食物的景象，又重返到他的腦海，終於下定決心創業，改變台灣現有的食物浪費問題。</p><p>『惜食』的出發點是環保，且能有效利用社會和環境資源，早在歐美地區行之有年，例如2015年在丹麥成立的Too Good To Go，讓消費者能用3到5歐元（約3.2到5.3美元）的價格，到餐廳或飲食店帶走價值三倍的食物，成功地激起當地消費者熱愛環保的善心，並順利進軍歐洲以外的加拿大及美國市場。</p><p>參考了國外範例，葉柏軍抱持著讓更多餐飲業者理解、甚至一同支持食物循環經濟的理念，親自到台北市最繁華的台北車站和西門町區域，拜訪了一百多家餐廳業者，向老闆們一一探討餐廳剩食問題。</p><p>藉由親自走訪，瞭解到解決食物浪費刻不容緩後，為了讓食物流向更好的去處，葉柏軍決定打造出食物媒合平臺，Tasteme於焉誕生。</p><h3>核心機制：良食福袋與雙贏商業模式</h3><p>過往在台灣，無論是餐廳、烘培坊等餐飲業者，幾乎都將熟食及剩餘食物，視為店家的必要成本，甚至是經營過程裡必要的沉沒成本。</p><p>所謂的沉沒成本（Sunk Cost），是指經濟學或商業模式裡已付出且不可回收的成本，比方說一間麵包坊，不管能不能賣完，每天都需要出爐數十個甚至上百個新鮮麵包；而有中央廚房的連鎖業者，更可能需要每天製造出數百個香噴噴的麵包。</p><p>這些食物並不一定能當天完售，很多時候會產生『剩食』，即期食品、難以保鮮的食物和生鮮熟食，又比食物原料更具急迫性，需要人們去解決。根據聯合國組織所做的調查，光是在擁有2300萬人口的台灣，每年就產生無數的糧食損耗，像是在2013年時，台灣人浪費了367.7萬噸的糧食，若以90cm的廚餘桶裝起，台灣一天丟棄的廚餘桶，可以堆3700棟101大樓。</p><p>即使如此，台灣政府和民間團體乃至企業，仍多以公益層面處理『剩食』，形成了受眾較小、無法盈利的局面，因為會接受熟食的機構，多屬於食物銀行、街友及慈善團體等，雖然能減少廚餘產生，但無論是從受眾基數或循環層面來講，都不能發揮出最大的效果。</p><p>葉柏軍指出，這種由餐飲、烘培業者間接導致的『剩食』問題，應同樣藉由商業模式解決，讓一般人也有機會接觸到『剩食』，才能有效解決糧食損耗議題；當店家的沉沒成本不再沈默，而是以低廉的價格銷售，讓口袋較淺的學生、環保人士乃至一般大眾都能購買，才有機會幫助到更多的人，形成善與美的循環。</p><h3>榮獲德國iF SOCIAL IMPACT PRIZE肯定</h3><p>相較於綠色永續概念發達的歐洲，亞洲地區像是香港、新加坡和台灣，都越來越注重環境議題和糧食耗損問題，『節約糧食』的理念早在一般人心中萌芽，像是在外食盛行的台灣，許多年輕人喜歡自備餐具和吸管、環保杯，走到哪裡都要用自己的餐具，並拒絕使用保麗龍、一次性塑膠餐具和紙杯碗，這也是Tasteme APP，將平臺介面和品牌形象，都打造得較為年輕化的原因。</p><p>這樣的運作模式，除了幫助餐飲業者藉由『惜食』來回收成本、打造出良好的社會形象，甚至能促進店家來客率，或促進試吃、嚐鮮的效果，讓更多消費者熟悉自家餐飲品牌。</p><p>對於消費者來說，經由Tasteme下單不僅輕鬆又省錢，還能兼顧環保理念，解決掉糧食損耗問題，讓食物不再被回收和掩埋，自然能減少甲烷等溫室氣體排放，對我們的環境更好。</p><p>而對於Tasteme來説，藉由和美食業者的合作，自然能長久順利地將平臺營運下去；這種四方共立的模式，能幫助彼此互利互惠，而非互相抗衡，更符合永續經營的理念。</p><p>儘管出發點是環保，但在問到Tasteme創立至今，曾遇過哪些棘手問題或挑戰時，葉柏軍也坦言，這類食物循環平臺在台灣沒人做過，因此遇到過不少挑戰。</p><p>比方Tasteme主要做惜食共享，代表店家有多餘食物剩下才能販售，而Tasteme平臺上的『預訂』功能，在剛開始常受到消費者誤解，因為在店家剛好沒有剩餘食物時，自然無法提供販售，消費者也就無法拿到食物。</p><p>所幸在經過推廣後，顧客漸漸能理解平臺用意。另一方面，因為Tasteme屬於嶄新的商業模式，要說服自助餐、烘培業等傳統餐飲業者加入，也耗費了好一番工夫；Tasteme所能做的，就是盡心推廣、說服志同道合的業者加入，讓剩食有更好的解決出路，並加強擴大其社會影響力。</p><p>關於食物保鮮問題，葉柏軍認為，Tasteme屬於提供『剩食』的平臺，許多消費者會考量到食物是否新鮮；事實上，Tasteme已成交超過四萬筆，且採取消費者親自到店取餐的模式，也就是說，店家必需當著顧客的面交出食物，自然杜絕了販售不新鮮或有疑慮食物的問題，而Tasteme也經過嚴格篩選，精心挑選具有商譽或品質的好店家，讓顧客能更放心享用美食。</p><p>除此之外，Tasteme採取儲值代幣再消費的結帳方式，也讓不少消費者產生疑惑，認為不如直接刷信用卡來得方便。對此葉柏軍解釋，Tasteme主要做食物媒合，也因為預訂功能可能導致退款，一般信用卡在結帳時，需要連結到消費平台和銀行系統，容易產生風險；但透過T-coin儲值，即便後續退款也是在Tasteme平臺的封閉系統運作，代表消費者僅會在購買儲值代幣時提供信用卡資訊，相對來講更為安全。</p>">
                         <div class="diagonal-stripe-bg"></div>
                         <div class="featured-card-content">
                             <div>
@@ -511,11 +552,12 @@
                             </div>
                             <div class="card-media-bar">
                                 <span class="media-btn-item">🎧 6 Min.</span>
-                                <span class="media-btn-item">💬</span>
+                                <span class="media-btn-item">💬 48</span>
                                 <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="featured-sub-group">
                         <div class="featured-card-item featured-sub-card js-article-card" 
                              data-title="So geht Teilzeit ohne Falle" 
@@ -531,92 +573,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ARTICLE MODAL -->
-    <div class="modal-overlay" id="articleModal">
-        <div class="article-modal">
-            <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
-            <div class="article-header">
-                <h2 class="article-title" id="modalTitle">文章標題</h2>
-                <p class="article-intro" id="modalIntro">文章簡介</p>
-                <div class="article-meta-info" id="modalMeta">AUDIO • 6 MIN</div>
-            </div>
-            <div class="article-action-bar">
-                <!-- 音樂播放器控制項 -->
-                <div class="audio-player-container">
-                    <audio id="modalAudio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的瀏覽器不支援音訊播放器。
-                    </audio>
-                </div>
-            </div>
-            <div class="article-body-content" id="modalBody">
-                <!-- 文章內文 -->
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        const modalOverlay = id('articleModal');
-        const modalCloseBtn = id('modalCloseBtn');
-        const modalTitle = id('modalTitle');
-        const modalIntro = id('modalIntro');
-        const modalMeta = id('modalMeta');
-        const modalBody = id('modalBody');
-        const modalAudio = id('modalAudio');
-
-        function id(name) { return document.getElementById(name); }
-
-        // 綁定所有卡片點擊事件
-        document.querySelectorAll('.js-article-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                // 如果點擊到收藏按鈕，不開啟彈窗
-                if (e.target.classList.contains('js-bookmark')) return;
-
-                const title = card.getAttribute('data-title') || '';
-                const intro = card.getAttribute('data-intro') || '';
-                const time = card.getAttribute('data-time') || '';
-                const body = card.getAttribute('data-body') || '<p>暫無內文內容。</p>';
-                const audioSrc = card.getAttribute('data-audio');
-
-                modalTitle.textContent = title;
-                modalIntro.textContent = intro;
-                modalMeta.textContent = `AUDIO • ${time}`;
-                modalBody.innerHTML = body;
-
-                // 設置音檔 Source
-                if (audioSrc) {
-                    modalAudio.src = audioSrc;
-                    modalAudio.parentElement.style.display = 'block';
-                } else {
-                    modalAudio.pause();
-                    modalAudio.src = '';
-                    modalAudio.parentElement.style.display = 'none';
-                }
-
-                modalOverlay.classList.add('active');
-            });
-        });
-
-        // 關閉彈窗事件
-        modalCloseBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            modalAudio.pause(); // 關閉彈窗時自動暫停音效
-        }
-    </script>
-</body>
-</html>
                         <div class="featured-card-item featured-sub-card js-article-card" 
                              data-title="Brand Strategy Deep Dive" 
                              data-intro="Exploring modern brand marketing and localized story editing."
@@ -711,7 +667,7 @@
                         </div>
                         <div class="card-media-bar">
                             <span class="media-btn-item">🎧</span>
-                            <span class="media-btn-item">💬</span>
+                            <span class="media-btn-item">💬 68</span>
                             <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
                         </div>
                     </div>
@@ -778,221 +734,94 @@
                 </div>
             </div>
         </section>
-
-        <div class="grid-line"></div>
-
-        <!-- 03 VIDEO WORK -->
-        <section id="video-work" class="page-section" style="scroll-margin-top: 100px;">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <span class="section-num">03</span>
-                    <span class="section-title">VIDEO WORK</span>
-                </div>
-                <span class="scroll-hint">SLIDE TO VIEW MORE →</span>
-            </div>
-
-            <div class="horizontal-scroll-wrapper">
-                <div class="scroll-card js-article-card" 
-                     data-title="CapCut Short Reels Concept" 
-                     data-intro="使用 CapCut 製作的高節奏短影音，搭配視覺敘事提升觀看完播率。"
-                     data-time="3 Min." data-comments="150">
-                    <div class="card-img-wrapper">
-                        <div class="diagonal-stripe-bg"></div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <h3 class="card-title">CapCut Short Reels</h3>
-                            <p class="card-excerpt">高節奏短影音剪輯，搭配視覺敘事提升觀看完播率。</p>
-                        </div>
-                        <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
-                            <span class="media-btn-item">💬 150</span>
-                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scroll-card js-article-card" 
-                     data-title="Brand Promo Video Editing" 
-                     data-intro="掌握品牌影片節奏與配樂，傳遞核心產品價值的動態視覺作品。"
-                     data-time="4 Min." data-comments="92">
-                    <div class="card-img-wrapper">
-                        <div class="diagonal-stripe-bg"></div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <h3 class="card-title">Brand Promo Video</h3>
-                            <p class="card-excerpt">掌握品牌影片節奏與配樂，傳遞核心產品價值的視覺作品。</p>
-                        </div>
-                        <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
-                            <span class="media-btn-item">💬 92</span>
-                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scroll-card js-article-card" 
-                     data-title="Social Media Story Clips" 
-                     data-intro="專為社群媒體打造的直式動態短片，提升品牌觸及率與互動數。"
-                     data-time="2 Min." data-comments="110">
-                    <div class="card-img-wrapper">
-                        <div class="diagonal-stripe-bg"></div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <h3 class="card-title">Social Story Clips</h3>
-                            <p class="card-excerpt">專為社群媒體打造的直式動態短片，提升品牌觸及率。</p>
-                        </div>
-                        <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
-                            <span class="media-btn-item">💬 110</span>
-                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="grid-line"></div>
-
-        <!-- 04 ABOUT & 05 CONTACT -->
-        <section style="margin-bottom: 120px;">
-            <div class="about-row page-section" id="about" style="scroll-margin-top: 100px;">
-                <span class="detail-num">04</span>
-                <span class="detail-label">ABOUT</span>
-                <div class="detail-paragraph">
-                    I'm Irene, a digital marketer, copywriter, and content editor. I craft localized brand narratives, digital content, and strategic campaigns that respect the reader. I care about structure, narrative flow, and cross-cultural clarity.
-                </div>
-                <div class="about-sidebar">
-                    <div>Digital Marketer & Editor</div>
-                    <div>Based in Taiwan / Remote</div>
-                    <div>Open to collaborations</div>
-                </div>
-            </div>
-
-            <div class="detail-row page-section" id="contact" style="scroll-margin-top: 100px;">
-                <span class="detail-num">05</span>
-                <span class="detail-label">CONTACT</span>
-                <div>
-                    <h2 class="contact-heading">Let's talk —</h2>
-                    <a href="mailto:yijin.chen529@gmail.com" class="email-large">yijin.chen529@gmail.com</a>
-                    <div class="social-links-group">
-                        <a href="#" class="social-link-mono">YOUTUBE</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer>
-            <div>© 2026 Irene Chen. All rights reserved.</div>
-            <div style="font-family: var(--font-mono);"><a href="#" style="color:inherit; text-decoration:none;">SCROLL TOP ↑</a></div>
-        </footer>
     </div>
 
     <!-- ARTICLE MODAL -->
     <div class="modal-overlay" id="articleModal">
         <div class="article-modal">
-            <button class="modal-close-btn" id="closeModal">&times;</button>
+            <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
             <div class="article-header">
-                <h1 class="article-title" id="modalTitle"></h1>
-                <p class="article-intro" id="modalIntro"></p>
-                <div class="article-meta-info">
-                    By Irene Chen &bull; Asia Business Leaders Review
-                </div>
-                <div class="article-action-bar">
-                    <button class="listen-btn-pill">
-                        <span>▶</span> <span id="modalTime"></span>
-                    </button>
-                    <button class="action-icon-btn">
-                        💬 <span id="modalComments"></span>
-                    </button>
-                    <button class="action-icon-btn modal-bookmark js-bookmark">
-                        🔖
-                    </button>
+                <h2 class="article-title" id="modalTitle">文章標題</h2>
+                <p class="article-intro" id="modalIntro">文章簡介</p>
+                <div class="article-meta-info" id="modalMeta">AUDIO • 6 MIN</div>
+            </div>
+            <div class="article-action-bar">
+                <!-- 音樂播放器控制項 -->
+                <div class="audio-player-container">
+                    <audio id="modalAudio" controls>
+                        <source id="modalAudioSource" src="" type="audio/mpeg">
+                        您的瀏覽器不支援音訊播放器。
+                    </audio>
                 </div>
             </div>
-            <div class="article-body-content" id="modalBody"></div>
+            <div class="article-body-content" id="modalBody">
+                <!-- 文章內文 -->
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('articleModal');
-            const closeModal = document.getElementById('closeModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalIntro = document.getElementById('modalIntro');
-            const modalTime = document.getElementById('modalTime');
-            const modalComments = document.getElementById('modalComments');
-            const modalBody = document.getElementById('modalBody');
+        const modalOverlay = id('articleModal');
+        const modalCloseBtn = id('modalCloseBtn');
+        const modalTitle = id('modalTitle');
+        const modalIntro = id('modalIntro');
+        const modalMeta = id('modalMeta');
+        const modalBody = id('modalBody');
+        const modalAudio = id('modalAudio');
 
-            // 點擊收藏按鈕
-            document.querySelectorAll('.js-bookmark').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    btn.classList.toggle('active');
-                });
-            });
+        function id(name) { return document.getElementById(name); }
 
-            // 點擊卡片開啟 Modal
-            document.querySelectorAll('.js-article-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.js-bookmark')) return;
+        // 綁定所有卡片點擊事件
+        document.querySelectorAll('.js-article-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // 如果點擊到收藏按鈕，不開啟彈窗
+                if (e.target.classList.contains('js-bookmark')) return;
 
-                    const title = card.getAttribute('data-title') || 'Article Title';
-                    const intro = card.getAttribute('data-intro') || 'Article summary description...';
-                    const time = card.getAttribute('data-time') || '10 Min.';
-                    const comments = card.getAttribute('data-comments') || '0';
-                    const body = card.getAttribute('data-body') || '<p>內文載入中...</p>';
+                const title = card.getAttribute('data-title') || '';
+                const intro = card.getAttribute('data-intro') || '';
+                const time = card.getAttribute('data-time') || '';
+                const body = card.getAttribute('data-body') || '<p>暫無內文內容。</p>';
+                const audioSrc = card.getAttribute('data-audio');
 
-                    modalTitle.textContent = title;
-                    modalIntro.textContent = intro;
-                    modalTime.textContent = time;
-                    modalComments.textContent = comments;
-                    modalBody.innerHTML = body;
+                modalTitle.textContent = title;
+                modalIntro.textContent = intro;
+                modalMeta.textContent = `AUDIO • ${time}`;
+                modalBody.innerHTML = body;
 
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-
-            // 關閉 Modal
-            closeModal.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
+                // 設置音檔 Source
+                if (audioSrc) {
+                    modalAudio.src = audioSrc;
+                    modalAudio.parentElement.style.display = 'block';
+                    modalAudio.load();
+                } else {
+                    modalAudio.pause();
+                    modalAudio.src = '';
+                    modalAudio.parentElement.style.display = 'none';
                 }
-            });
 
-            // 導航列高亮
-            const sections = document.querySelectorAll('.page-section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
+                modalOverlay.classList.add('active');
             });
         });
-    </script>
 
+        // 綁定收藏按鈕切換效果
+        document.querySelectorAll('.js-bookmark').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                btn.classList.toggle('active');
+            });
+        });
+
+        // 關閉彈窗事件
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            modalAudio.pause(); // 關閉彈窗時自動暫停音效
+        }
+    </script>
 </body>
 </html>

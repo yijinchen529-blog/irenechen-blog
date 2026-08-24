@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRENE CHEN - Portfolio</title>
+    <style>
+        /* ==========================================================================
+           RESET & CORE STYLES
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-color: #fcfcfc;
+            --text-primary: #111111;
+            --text-secondary: #71717a;
+            --accent-red: #e63946;
+            --border-color: #e5e5e5;
+            --border-dark: #111111;
+            --card-bg: #ffffff;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "SF Mono", "Fira Code", "Courier New", monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-y: scroll;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .grid-line {
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-color);
+            position: relative;
+            margin: 56px 0;
+        }
+
+        .grid-line::before {
+            content: "+";
+            position: absolute;
+            left: -10px;
+            top: -12px;
+            font-family: var(--font-mono);
+            font-size: 16px;
+            color: var(--accent-red);
+            font-weight: 300;
+        }
+
+        .diagonal-stripe-bg {
+            background-color: #f4f4f5;
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(0, 0, 0, 0.05),
+                rgba(0, 0, 0, 0.05) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* ==========================================================================
+           HEADER NAV
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(252, 252, 252, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 900;
+        }
+
+        .brand-name {
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .nav-link span {
+            color: var(--text-secondary);
+            margin-right: 4px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        .nav-link.active span {
+            color: var(--accent-red);
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding: 80px 0 50px;
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 28px;
+        }
+
+        .hero-quote {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .hero-quote .highlight-red {
+            color: var(--accent-red);
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+        }
+
+        .circle-ornament {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 1px solid #d4d4d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle-ornament::after {
+            content: "";
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid #fca5a5;
+        }
+
+        .info-list {
+            width: 100%;
+            border-top: 1px solid var(--accent-red);
+            padding-top: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+
+        .info-label {
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           COMMON SCROLL & CARD STYLES
+           ========================================================================== */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+        }
+
+        .section-header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+        }
+
+        .section-num {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .scroll-hint {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .horizontal-scroll-wrapper {
+            display: flex;
+            gap: 24px;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 16px;
+            margin-bottom: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-red) var(--border-color);
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar {
+            height: 6px;
+            display: block;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent-red);
+            border-radius: 4px;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #111111;
+        }
+
+        /* 01 FEATURED CARDS */
+        .featured-group {
+            flex: 0 0 1000px;
+            scroll-snap-align: start;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .featured-card-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            cursor: pointer;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .featured-main-card { height: 420px; }
+        .featured-sub-group { display: flex; flex-direction: column; gap: 24px; }
+        .featured-sub-card { height: 198px; }
+
+        .featured-card-item:hover .diagonal-stripe-bg { transform: scale(1.05); }
+        .featured-card-item:hover { border-color: var(--border-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+
+        .featured-card-content {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: 28px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            z-index: 2;
+        }
+
+        .featured-sub-card .featured-card-content { padding: 16px; }
+
+        .featured-card-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .featured-card-title-text {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-top: 8px;
+            color: var(--text-primary);
+        }
+
+        .featured-card-desc-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 02 & 03 CARDS */
+        .scroll-card {
+            flex: 0 0 360px;
+            scroll-snap-align: start;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: border-color 0.4s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-img-wrapper {
+            height: 180px;
+            width: 100%;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden; 
+        }
+
+        .scroll-card:hover {
+            border-color: var(--border-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .scroll-card:hover .diagonal-stripe-bg { transform: scale(1.05); }
+
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .card-title { font-size: 1.1rem; font-weight: 700; }
+        .card-excerpt { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .card-media-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 12px;
+            margin-top: 4px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+        }
+
+        .media-btn-item { display: flex; align-items: center; gap: 6px; }
+
+        .bookmark-btn {
+            background: none; border: none; color: #71717a; cursor: pointer; font-size: 0.95rem; padding: 0; display: inline-flex; align-items: center; transition: color 0.2s ease;
+        }
+
+        .bookmark-btn:hover { color: #111111; }
+        .bookmark-btn.active { color: var(--accent-red) !important; }
+
+        /* ==========================================================================
+           ARTICLE MODAL
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .article-modal {
+            background: #111111;
+            color: #ffffff;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            padding: 48px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .article-modal { transform: translateY(0); }
+
+        .modal-close-btn {
+            position: absolute; top: 24px; right: 24px; background: none; border: none; color: #888888; font-size: 1.5rem; cursor: pointer;
+        }
+        .modal-close-btn:hover { color: #ffffff; }
+
+        .article-header { text-align: center; margin-bottom: 32px; }
+        .article-title { font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .article-intro { font-size: 1.15rem; color: #a1a1aa; line-height: 1.6; margin-bottom: 24px; max-width: 680px; margin-left: auto; margin-right: auto; }
+        .article-meta-info { font-size: 0.85rem; color: #71717a; font-family: var(--font-mono); margin-bottom: 28px; }
+
+        .article-action-bar {
+            display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #27272a;
+        }
+
+        .listen-btn-pill {
+            background: #27272a; color: #ffffff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: background 0.2s;
+        }
+        .listen-btn-pill:hover { background: #3f3f46; }
+
+        .action-icon-btn {
+            background: transparent; border: none; color: #a1a1aa; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; padding: 8px 12px; cursor: pointer; border-radius: 6px; font-family: var(--font-mono); transition: color 0.2s;
+        }
+        .action-icon-btn:hover { color: #ffffff; }
+
+        .article-body-content { font-size: 1.05rem; line-height: 1.8; color: #d4d4d8; }
+        .article-body-content p { margin-bottom: 1.5rem; }
+        .article-body-content h3 { color: #ffffff; font-size: 1.3rem; margin: 2rem 0 1rem; border-left: 3px solid var(--accent-red); padding-left: 12px; }
+
+        /* ==========================================================================
+           04 ABOUT & 05 CONTACT SECTIONS
+           ========================================================================== */
+        .detail-row { display: grid; grid-template-columns: 60px 200px 1fr; gap: 24px; padding: 40px 0; border-top: 1px solid var(--border-color); align-items: start; }
+        .about-row { display: grid; grid-template-columns: 60px 200px 1fr 240px; gap: 24px; padding: 40px 0; border-top: 1px solid var(--border-color); align-items: start; }
+        .detail-num { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent-red); }
+        .detail-label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); }
+        .detail-paragraph { font-size: 1.25rem; font-weight: 500; line-height: 1.5; color: var(--text-primary); }
+        .about-sidebar { font-size: 0.85rem; color: #a1a1aa; line-height: 1.6; }
+        .contact-heading { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+        .email-large { font-size: 3.5rem; font-weight: 800; color: var(--accent-red); text-decoration: none; display: block; margin-bottom: 24px; }
+        .social-links-group { display: flex; gap: 24px; }
+        .social-link-mono { color: var(--text-secondary); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
+
+        footer { padding: 60px 0; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); }
+
+        @media (max-width: 850px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+            .featured-group { grid-template-columns: 1fr; width: 100%; }
+            .detail-row, .about-row { grid-template-columns: 40px 1fr; }
+            .detail-label, .about-sidebar { grid-column: span 2; }
+            .contact-heading, .email-large { font-size: 2.2rem; }
+            .article-modal { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="brand-name">IRENE CHEN — PORTFOLIO</div>
+            <nav class="header-nav">
+                <a href="#featured" class="nav-link active"><span>01</span>FEATURED</a>
+                <a href="#work" class="nav-link"><span>02</span>WORK</a>
+                <a href="#video-work" class="nav-link"><span>03</span>VIDEO WORK</a>
+                <a href="#about" class="nav-link"><span>04</span>ABOUT</a>
+                <a href="#contact" class="nav-link"><span>05</span>CONTACT</a>
+            </nav>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div>
+                <div class="hero-tag">PERSONAL INDEX — 2026</div>
+                <h1 class="hero-title">Digital Marketer, Copywriter & Content Editor.</h1>
+                <p class="hero-quote">
+                    Good design is <span class="highlight-red">invisible</span>. It respects the reader and gets out of the way.
+                </p>
+            </div>
+            
+            <div class="hero-right">
+                <div class="circle-ornament"></div>
+                <div class="info-list">
+                    <div class="info-item"><span class="info-label">ROLE</span><span>Content Editor</span></div>
+                    <div class="info-item"><span class="info-label">COMPANY</span><span>Freelance</span></div>
+                    <div class="info-item"><span class="info-label">FOCUS</span><span>Content Strategy</span></div>
+                    <div class="info-item"><span class="info-label">STATUS</span><span>Open to work</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 01 FEATURED WORK SHOWCASE -->
+        <section id="featured" class="page-section" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">01</span>
+                    <span class="section-title">FEATURED WORK SHOWCASE</span>
+                </div>
+                <span class="scroll-hint">SLIDE TO VIEW MORE SETS →</span>
+            </div>
+
+            <div class="horizontal-scroll-wrapper">
+                <!-- 第一組展示：已嵌入 Tasteme 文章 -->
+                <div class="featured-group">
+                    <div class="featured-card-item featured-main-card js-article-card" 
+                         data-title="Tasteme 讓環保和盈利成為雙贏：專訪惜食平台營運哲學"
+                         data-intro="從一顆剩餘甜甜圈啟發的商業轉機！Tasteme 推出『良食福袋』模式，結合彈性折扣與數位平台，完美解決餐飲業剩食痛點，創造環境永續與企業獲利的新雙贏方程式。"
+                         data-time="6 Min." 
+                         data-comments="48"
+                         data-body="&lt;h3&gt;創立契機：翻轉剩食問題的商業思維&lt;/h3&gt;&lt;p&gt;餐飲業長期面臨每日營運結算時未售出食品的浪費問題。Tasteme 團隊觀察到，傳統惜食模式常面臨銷售管道侷限、品牌形象折損與履約成本高昂的挑戰。&lt;/p&gt;&lt;h3&gt;核心機制：良食福袋與雙贏商業模式&lt;/h3&gt;&lt;p&gt;Tasteme 推出『良食福袋』機制，讓店家可以在每日營業尾聲，將品質良好但即將過期或當日未售完的餐點以優惠價格組裝上架。透過預先線上付款與指定時間自取，有效解決了傳統現場折扣容易引發的棄單風險與現場排隊混亂。&lt;/p&gt;&lt;h3&gt;ESG 永續價值與市場影響力&lt;/h3&gt;&lt;p&gt;對消費者而言，能以高性價比取得優質食物；對店家而言，能降低高昂的廚餘處理成本並開創額外營收。透過良食循環系統，Tasteme 不僅減輕了社會資源的浪費，更讓企業在實踐 ESG 永續目標的同時，達成實質盈利。&lt;/p&gt;">
+                        <div class="diagonal-stripe-bg"></div>
+                        <div class="featured-card-content">
+                            <div>
+                                <div class="featured-card-tag">FEATURED STORY SET 01 — ARTICLE</div>
+                                <h2 class="featured-card-title-text">Tasteme 讓環保和盈利成為雙贏</h2>
+                                <p class="featured-card-desc-text">從剩食痛點到良食福袋模式，專訪 Tasteme 如何透過數位平台讓餐飲永續與企業獲利並存。</p>
+                            </div>
+                            <div class="card-media-bar">
+                                <span class="media-btn-item">🎧 6 Min.</span>
+                                <span class="media-btn-item">💬 48</span>
+                                <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-sub-group">
+                        <div class="featured-card-item featured-sub-card js-article-card" 
+                             data-title="So geht Teilzeit ohne Falle" 
+                             data-intro="Wer die Arbeitszeit reduziert, schrumpft seine Rente. Das trifft oft Mütter."
+                             data-time="8 Min." data-comments="123">
+                            <div class="diagonal-stripe-bg"></div>
+                            <div class="featured-card-content">
+                                <div>FEATURED SUB 01</div>
+                                <div class="card-media-bar">
+                                    <span class="media-btn-item">🎧</span>
+                                    <span class="media-btn-item">💬 123</span>
+                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="featured-card-item featured-sub-card js-article-card" 
+                             data-title="Brand Strategy Deep Dive" 
+                             data-intro="Exploring modern brand marketing and localized story editing."
+                             data-time="5 Min." data-comments="42">
+                            <div class="diagonal-stripe-bg"></div>
+                            <div class="featured-card-content">
+                                <div>FEATURED SUB 02</div>
+                                <div class="card-media-bar">
+                                    <span class="media-btn-item">🎧</span>
+                                    <span class="media-btn-item">💬 42</span>
+                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二組展示 -->
+                <div class="featured-group">
+                    <div class="featured-card-item featured-main-card js-article-card" 
+                         data-title="Cross-Border E-Commerce Narrative"
+                         data-intro="How localized content marketing reshapes European furniture brands."
+                         data-time="15 Min." data-comments="64">
+                        <div class="diagonal-stripe-bg"></div>
+                        <div class="featured-card-content">
+                            <div>FEATURED STORY SET 2</div>
+                            <div class="card-media-bar">
+                                <span class="media-btn-item">🎧</span>
+                                <span class="media-btn-item">💬 64</span>
+                                <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-sub-group">
+                        <div class="featured-card-item featured-sub-card js-article-card" 
+                             data-title="SEO Optimization Strategy" 
+                             data-intro="Driving organic growth through multi-platform article structuring."
+                             data-time="6 Min." data-comments="89">
+                            <div class="diagonal-stripe-bg"></div>
+                            <div class="featured-card-content">
+                                <div>FEATURED SUB 03</div>
+                                <div class="card-media-bar">
+                                    <span class="media-btn-item">🎧</span>
+                                    <span class="media-btn-item">💬 89</span>
+                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="featured-card-item featured-sub-card js-article-card" 
+                             data-title="Creative Editing Systems" 
+                             data-intro="Structuring workflow between writers and executive editors."
+                             data-time="9 Min." data-comments="31">
+                            <div class="diagonal-stripe-bg"></div>
+                            <div class="featured-card-content">
+                                <div>FEATURED SUB 04</div>
+                                <div class="card-media-bar">
+                                    <span class="media-btn-item">🎧</span>
+                                    <span class="media-btn-item">💬 31</span>
+                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 02 SELECTED WORK CARDS -->
+        <section id="work" class="page-section" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">02</span>
+                    <span class="section-title">SELECTED WORK CARDS</span>
+                </div>
+                <span class="scroll-hint">SLIDE TO VIEW MORE →</span>
+            </div>
+
+            <div class="horizontal-scroll-wrapper">
+                <div class="scroll-card js-article-card" 
+                     data-title="Brand Marketing Campaign" 
+                     data-intro="如何透過精準文案與品牌故事，在跨境市場提升 300% 互動率。"
+                     data-time="10 Min." data-comments="68">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Brand Marketing</h3>
+                            <p class="card-excerpt">如何透過精準文案與品牌故事，在跨境市場提升 300% 互動率。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 68</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card" 
+                     data-title="Editorial & Copywriting Localized" 
+                     data-intro="針對台灣與歐洲跨國市場進行高質感專題採訪與文案本土化。"
+                     data-time="15 Min." data-comments="88">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Editorial & Copywriting</h3>
+                            <p class="card-excerpt">針對台灣與歐洲跨國市場進行高質感專題採訪與文案本土化。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 88</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card" 
+                     data-title="Vintage Furniture Sourcing" 
+                     data-intro="德國古董家具選品經營，著重於社群故事化行銷與物流引流。"
+                     data-time="7 Min." data-comments="34">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Vintage Sourcing</h3>
+                            <p class="card-excerpt">德國古董家具選品經營，著重於社群故事化行銷與物流引流。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 34</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card" 
+                     data-title="Content Strategy Blueprint" 
+                     data-intro="打造高黏著度的內容矩陣與跨平台發布策略。"
+                     data-time="11 Min." data-comments="51">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Content Strategy</h3>
+                            <p class="card-excerpt">打造高黏著度的內容矩陣與跨平台發布策略。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 51</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 03 VIDEO WORK -->
+        <section id="video-work" class="page-section" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">03</span>
+                    <span class="section-title">VIDEO WORK</span>
+                </div>
+                <span class="scroll-hint">SLIDE TO VIEW MORE →</span>
+            </div>
+
+            <div class="horizontal-scroll-wrapper">
+                <div class="scroll-card js-article-card" 
+                     data-title="CapCut Short Reels Concept" 
+                     data-intro="使用 CapCut 製作的高節奏短影音，搭配視覺敘事提升觀看完播率。"
+                     data-time="3 Min." data-comments="150">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">CapCut Short Reels</h3>
+                            <p class="card-excerpt">高節奏短影音剪輯，搭配視覺敘事提升觀看完播率。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 150</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card" 
+                     data-title="Brand Promo Video Editing" 
+                     data-intro="掌握品牌影片節奏與配樂，傳遞核心產品價值的動態視覺作品。"
+                     data-time="4 Min." data-comments="92">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Brand Promo Video</h3>
+                            <p class="card-excerpt">掌握品牌影片節奏與配樂，傳遞核心產品價值的視覺作品。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 92</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card" 
+                     data-title="Social Media Story Clips" 
+                     data-intro="專為社群媒體打造的直式動態短片，提升品牌觸及率與互動數。"
+                     data-time="2 Min." data-comments="110">
+                    <div class="card-img-wrapper">
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Social Story Clips</h3>
+                            <p class="card-excerpt">專為社群媒體打造的直式動態短片，提升品牌觸及率。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">💬 110</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 04 ABOUT & 05 CONTACT -->
+        <section style="margin-bottom: 120px;">
+            <div class="about-row page-section" id="about" style="scroll-margin-top: 100px;">
+                <span class="detail-num">04</span>
+                <span class="detail-label">ABOUT</span>
+                <div class="detail-paragraph">
+                    I'm Irene, a digital marketer, copywriter, and content editor. I craft localized brand narratives, digital content, and strategic campaigns that respect the reader. I care about structure, narrative flow, and cross-cultural clarity.
+                </div>
+                <div class="about-sidebar">
+                    <div>Digital Marketer & Editor</div>
+                    <div>Based in Taiwan / Remote</div>
+                    <div>Open to collaborations</div>
+                </div>
+            </div>
+
+            <div class="detail-row page-section" id="contact" style="scroll-margin-top: 100px;">
+                <span class="detail-num">05</span>
+                <span class="detail-label">CONTACT</span>
+                <div>
+                    <h2 class="contact-heading">Let's talk —</h2>
+                    <a href="mailto:hello@example.com" class="email-large">hello@example.com</a>
+                    <div class="social-links-group">
+                        <a href="#" class="social-link-mono">LINKEDIN</a>
+                        <a href="#" class="social-link-mono">YOUTUBE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div>&copy; 2026 Irene Chen. Built with Swiss Design Grid.</div>
+            <div style="font-family: var(--font-mono);"><a href="#" style="color:inherit; text-decoration:none;">SCROLL TOP ↑</a></div>
+        </footer>
+    </div>
+
+    <!-- ARTICLE MODAL -->
+    <div class="modal-overlay" id="articleModal">
+        <div class="article-modal">
+            <button class="modal-close-btn" id="closeModal">&times;</button>
+            <div class="article-header">
+                <h1 class="article-title" id="modalTitle"></h1>
+                <p class="article-intro" id="modalIntro"></p>
+                <div class="article-meta-info">
+                    By Irene Chen &bull; Asia Business Leaders Review
+                </div>
+                <div class="article-action-bar">
+                    <button class="listen-btn-pill">
+                        <span>▶</span> <span id="modalTime"></span>
+                    </button>
+                    <button class="action-icon-btn">
+                        💬 <span id="modalComments"></span>
+                    </button>
+                    <button class="action-icon-btn modal-bookmark js-bookmark">
+                        🔖
+                    </button>
+                </div>
+            </div>
+            <div class="article-body-content" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('articleModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalIntro = document.getElementById('modalIntro');
+            const modalTime = document.getElementById('modalTime');
+            const modalComments = document.getElementById('modalComments');
+            const modalBody = document.getElementById('modalBody');
+
+            // 點擊收藏按鈕
+            document.querySelectorAll('.js-bookmark').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    btn.classList.toggle('active');
+                });
+            });
+
+            // 點擊卡片開啟 Modal
+            document.querySelectorAll('.js-article-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.js-bookmark')) return;
+
+                    const title = card.getAttribute('data-title') || 'Article Title';
+                    const intro = card.getAttribute('data-intro') || 'Article summary description...';
+                    const time = card.getAttribute('data-time') || '10 Min.';
+                    const comments = card.getAttribute('data-comments') || '0';
+                    const body = card.getAttribute('data-body') || '<p>內文載入中...</p>';
+
+                    modalTitle.textContent = title;
+                    modalIntro.textContent = intro;
+                    modalTime.textContent = time;
+                    modalComments.textContent = comments;
+                    modalBody.innerHTML = body;
+
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // 關閉 Modal
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // 導航列高亮
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

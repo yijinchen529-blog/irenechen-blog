@@ -114,7 +114,7 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         .nav-link span {
@@ -125,13 +125,13 @@
             transition: all 0.3s ease;
         }
 
-        .nav-link.active {
+        .nav-link:hover, .nav-link.active {
             color: var(--text-primary);
             opacity: 1;
             font-weight: 700;
         }
 
-        .nav-link.active span {
+        .nav-link.active span, .nav-link:hover span {
             color: var(--accent-red);
         }
 
@@ -220,7 +220,7 @@
         }
 
         /* ==========================================================================
-           COMMON SCROLL & CARD STYLES
+           COMMON SECTION & SCROLL STYLES
            ========================================================================== */
         .section-header {
             display: flex;
@@ -259,7 +259,7 @@
         .horizontal-scroll-wrapper {
             display: flex;
             gap: 24px;
-            overflow-x: scroll;
+            overflow-x: auto;
             scroll-snap-type: x mandatory;
             padding-bottom: 16px;
             margin-bottom: 8px;
@@ -280,10 +280,6 @@
         .horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
             background: var(--accent-red);
             border-radius: 4px;
-        }
-
-        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #111111;
         }
 
         /* 01 FEATURED CARDS */
@@ -350,7 +346,7 @@
             overflow: hidden;
         }
 
-        /* 02 SELECTED WORK CARDS STYLES */
+        /* 02 & 03 CARDS STYLES */
         .scroll-card {
             flex: 0 0 320px;
             scroll-snap-align: start;
@@ -408,13 +404,117 @@
         .bookmark-btn:hover { color: #111111; }
         .bookmark-btn.active { color: var(--accent-red) !important; }
 
+        /* VIDEO CARDS SPECIFIC */
+        .video-card-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           04 ABOUT SECTION
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        .about-profile-card {
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            background: var(--card-bg);
+        }
+
+        .about-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .about-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-red);
+            margin-bottom: 24px;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .skill-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: #f4f4f5;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: var(--text-primary);
+        }
+
+        /* ==========================================================================
+           05 CONTACT SECTION
+           ========================================================================== */
+        .contact-box {
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .contact-detail-item {
+            margin-bottom: 16px;
+        }
+
+        .contact-detail-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .contact-detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .contact-detail-value:hover {
+            color: var(--accent-red);
+        }
+
         /* ==========================================================================
            ARTICLE MODAL
            ========================================================================== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
@@ -480,6 +580,7 @@
             .hero { grid-template-columns: 1fr; }
             .hero-title { font-size: 2.5rem; }
             .featured-group { grid-template-columns: 1fr; width: 100%; }
+            .about-grid, .contact-box { grid-template-columns: 1fr; }
             .article-modal { padding: 24px; }
         }
     </style>
@@ -533,9 +634,7 @@
             </div>
 
             <div class="horizontal-scroll-wrapper">
-                <!-- 第一組展示 -->
                 <div class="featured-group">
-                    <!-- Tasteme 文章與音檔路徑卡片 -->
                     <div class="featured-card-item featured-main-card js-article-card" 
                          data-title="Tasteme 讓環保和盈利成為雙贏：專訪惜食平台營運哲學"
                          data-intro="從剩餘甜甜圈啟發的商業轉機！Tasteme 推出『良食福袋』模式，結合彈性折扣與APP應用，完美解決餐飲業剩食痛點，創造環境永續與企業獲利的雙贏方程式"
@@ -589,54 +688,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 第二組展示 -->
-                <div class="featured-group">
-                    <div class="featured-card-item featured-main-card js-article-card" 
-                         data-title="Cross-Border E-Commerce Narrative"
-                         data-intro="How localized content marketing reshapes European furniture brands."
-                         data-time="15 Min." data-comments="64">
-                        <div class="diagonal-stripe-bg"></div>
-                        <div class="featured-card-content">
-                            <div>FEATURED STORY SET 2</div>
-                            <div class="card-media-bar">
-                                <span class="media-btn-item">🎧</span>
-                                <span class="media-btn-item">💬</span>
-                                <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-sub-group">
-                        <div class="featured-card-item featured-sub-card js-article-card" 
-                             data-title="SEO Optimization Strategy" 
-                             data-intro="Driving organic growth through multi-platform article structuring."
-                             data-time="6 Min." data-comments="89">
-                            <div class="diagonal-stripe-bg"></div>
-                            <div class="featured-card-content">
-                                <div>FEATURED SUB 03</div>
-                                <div class="card-media-bar">
-                                    <span class="media-btn-item">🎧</span>
-                                    <span class="media-btn-item">💬</span>
-                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="featured-card-item featured-sub-card js-article-card" 
-                             data-title="Creative Editing Systems" 
-                             data-intro="Structuring workflow between writers and executive editors."
-                             data-time="9 Min." data-comments="31">
-                            <div class="diagonal-stripe-bg"></div>
-                            <div class="featured-card-content">
-                                <div>FEATURED SUB 04</div>
-                                <div class="card-media-bar">
-                                    <span class="media-btn-item">🎧</span>
-                                    <span class="media-btn-item">💬</span>
-                                    <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -656,7 +707,8 @@
                 <div class="scroll-card js-article-card" 
                      data-title="Brand Marketing Campaign" 
                      data-intro="如何透過精準文案與品牌故事，在跨境市場提升 300% 互動率。"
-                     data-time="10 Min." data-comments="68">
+                     data-time="10 Min." data-comments="68"
+                     data-body="<p>此專案針對跨境電商進行全面的品牌文案升級，結合在地語境與高說服力的產品故事，實現顯著的社群互動與轉化成長。</p>">
                     <div class="card-img-wrapper">
                         <div class="diagonal-stripe-bg"></div>
                     </div>
@@ -666,7 +718,7 @@
                             <p class="card-excerpt">如何透過精準文案與品牌故事，在跨境市場提升 300% 互動率。</p>
                         </div>
                         <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">🎧 10 Min.</span>
                             <span class="media-btn-item">💬 68</span>
                             <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
                         </div>
@@ -676,7 +728,8 @@
                 <div class="scroll-card js-article-card" 
                      data-title="Editorial & Copywriting Localized" 
                      data-intro="針對台灣與歐洲跨國市場進行高質感專題採訪與文案本土化。"
-                     data-time="15 Min." data-comments="88">
+                     data-time="15 Min." data-comments="88"
+                     data-body="<p>深入訪談跨國企業與品牌創辦人，透過細膩的編輯邏輯與視覺化文字排版，呈現兼具深度與閱讀溫度的專題報導。</p>">
                     <div class="card-img-wrapper">
                         <div class="diagonal-stripe-bg"></div>
                     </div>
@@ -686,7 +739,7 @@
                             <p class="card-excerpt">針對台灣與歐洲跨國市場進行高質感專題採訪與文案本土化。</p>
                         </div>
                         <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">🎧 15 Min.</span>
                             <span class="media-btn-item">💬 88</span>
                             <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
                         </div>
@@ -696,7 +749,8 @@
                 <div class="scroll-card js-article-card" 
                      data-title="Vintage Furniture Sourcing" 
                      data-intro="德國古董家具選品經營，著重於社群故事化行銷與物流引流。"
-                     data-time="7 Min." data-comments="34">
+                     data-time="7 Min." data-comments="34"
+                     data-body="<p>紀錄於柏林營運古董家具選品的經歷，透過獨特的情境敘事與社群營運，成功引流並打造高黏著度的專屬受眾群。</p>">
                     <div class="card-img-wrapper">
                         <div class="diagonal-stripe-bg"></div>
                     </div>
@@ -706,29 +760,139 @@
                             <p class="card-excerpt">德國古董家具選品經營，著重於社群故事化行銷與物流引流。</p>
                         </div>
                         <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
+                            <span class="media-btn-item">🎧 7 Min.</span>
                             <span class="media-btn-item">💬 34</span>
                             <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="scroll-card js-article-card" 
-                     data-title="Content Strategy Blueprint" 
-                     data-intro="打造高黏著度的內容矩陣與跨平台發布策略。"
-                     data-time="11 Min." data-comments="51">
+        <div class="grid-line"></div>
+
+        <!-- 03 VIDEO WORK -->
+        <section id="video-work" class="page-section" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">03</span>
+                    <span class="section-title">VIDEO WORK & SHORT FORM CONTENT</span>
+                </div>
+                <span class="scroll-hint">SLIDE TO WATCH →</span>
+            </div>
+
+            <div class="horizontal-scroll-wrapper">
+                <div class="scroll-card js-article-card"
+                     data-title="Brand Storytelling Video"
+                     data-intro="短影音企劃與剪輯：呈現品牌核心價值與產品極簡美學。"
+                     data-time="1 Min." data-comments="25"
+                     data-body="<p>此影片負責腳本構思、分鏡規劃與 CapCut 剪輯製作，著重於前 3 秒吸引眼球的視覺節奏與聲音設計。</p>">
                     <div class="card-img-wrapper">
+                        <div class="video-card-badge">VIDEO • 01:20</div>
                         <div class="diagonal-stripe-bg"></div>
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3 class="card-title">Content Strategy</h3>
-                            <p class="card-excerpt">打造高黏著度的內容矩陣與跨平台發布策略。</p>
+                            <h3 class="card-title">Brand Storytelling</h3>
+                            <p class="card-excerpt">短影音企劃與剪輯：呈現品牌核心價值與產品極簡美學。</p>
                         </div>
                         <div class="card-media-bar">
-                            <span class="media-btn-item">🎧</span>
-                            <span class="media-btn-item">💬 51</span>
+                            <span class="media-btn-item">🎬 Video</span>
+                            <span class="media-btn-item">💬 25</span>
                             <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-card js-article-card"
+                     data-title="Social Media Reel Editing"
+                     data-intro="高互動短影音剪輯：節奏掌控與社群流行元素融入。"
+                     data-time="45 Sec." data-comments="41"
+                     data-body="<p>專為 Instagram Reels / TikTok 設計的內容，結合流行音訊與精準字卡包裝，顯著提升曝光與分享率。</p>">
+                    <div class="card-img-wrapper">
+                        <div class="video-card-badge">VIDEO • 00:45</div>
+                        <div class="diagonal-stripe-bg"></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Reel Editing</h3>
+                            <p class="card-excerpt">高互動短影音剪輯：節奏掌控與社群流行元素融入。</p>
+                        </div>
+                        <div class="card-media-bar">
+                            <span class="media-btn-item">🎬 Video</span>
+                            <span class="media-btn-item">💬 41</span>
+                            <button class="bookmark-btn js-bookmark" aria-label="收藏">🔖</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 04 ABOUT -->
+        <section id="about" class="page-section" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">04</span>
+                    <span class="section-title">ABOUT ME</span>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-profile-card">
+                    <h2 class="about-name">Irene Chen</h2>
+                    <p class="about-title">Digital Marketer & Executive Editor</p>
+                    <p class="about-text">擁有約 7 年媒體與數位行銷經驗。專長於品牌故事挖掘、內容矩陣規劃、跨國行銷文案本土化與影音企劃。</p>
+                    <p class="about-text">曾於德國柏林生活與工作，具備流利的德文 (C1) 與跨文化溝通視野。</p>
+                    <div class="skills-list">
+                        <span class="skill-tag">Content Strategy</span>
+                        <span class="skill-tag">Copywriting</span>
+                        <span class="skill-tag">CapCut</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">German C1</span>
+                    </div>
+                </div>
+
+                <div class="about-profile-card">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 16px; font-weight: 700;">EXPERIENCE & FOCUS</h3>
+                    <p class="about-text"><strong>Executive Editor / Content Strategy</strong><br>負責媒體平台內容方向、受眾數據分析與外部創作者團隊管理，優化文章發布流程與行銷成效。</p>
+                    <p class="about-text"><strong>Freelance Copywriter & Marketer</strong><br>為德國與新加坡等多國品牌提供高質感的華語行銷文案本土化服務，涵蓋建築、美食外送與文化產業。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-line"></div>
+
+        <!-- 05 CONTACT -->
+        <section id="contact" class="page-section" style="scroll-margin-top: 100px; margin-bottom: 100px;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <span class="section-num">05</span>
+                    <span class="section-title">CONTACT & GET IN TOUCH</span>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <div>
+                    <h3 class="contact-info-title">Let's work together.</h3>
+                    <p class="about-text">如果您正在尋找具備跨國視野、文字感染力與內容策略思維的夥伴，歡迎隨時與我聯繫。</p>
+                </div>
+
+                <div>
+                    <div class="contact-detail-item">
+                        <div class="contact-detail-label">EMAIL</div>
+                        <a href="mailto:hello@example.com" class="contact-detail-value">irene.chen@example.com</a>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-detail-label">LOCATION</div>
+                        <div class="contact-detail-value">New Taipei City / Remote</div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-detail-label">SOCIAL</div>
+                        <div style="display: flex; gap: 16px; margin-top: 4px;">
+                            <a href="#" class="contact-detail-value" style="font-size: 0.95rem;">LinkedIn</a>
+                            <a href="#" class="contact-detail-value" style="font-size: 0.95rem;">Portfolio</a>
                         </div>
                     </div>
                 </div>
@@ -746,8 +910,7 @@
                 <div class="article-meta-info" id="modalMeta">AUDIO • 6 MIN</div>
             </div>
             <div class="article-action-bar">
-                <!-- 音樂播放器控制項 -->
-                <div class="audio-player-container">
+                <div class="audio-player-container" id="audioPlayerContainer">
                     <audio id="modalAudio" controls>
                         <source id="modalAudioSource" src="" type="audio/mpeg">
                         您的瀏覽器不支援音訊播放器。
@@ -769,13 +932,14 @@
         const modalMeta = id('modalMeta');
         const modalBody = id('modalBody');
         const modalAudio = id('modalAudio');
+        const modalAudioSource = id('modalAudioSource');
+        const audioPlayerContainer = id('audioPlayerContainer');
 
         function id(name) { return document.getElementById(name); }
 
-        // 綁定所有卡片點擊事件
+        // 綁定所有卡片點擊開啟 Modal 事件
         document.querySelectorAll('.js-article-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // 如果點擊到收藏按鈕，不開啟彈窗
                 if (e.target.classList.contains('js-bookmark')) return;
 
                 const title = card.getAttribute('data-title') || '';
@@ -786,25 +950,28 @@
 
                 modalTitle.textContent = title;
                 modalIntro.textContent = intro;
-                modalMeta.textContent = `AUDIO • ${time}`;
+                modalMeta.textContent = `TIME • ${time}`;
                 modalBody.innerHTML = body;
 
-                // 設置音檔 Source
+                // 處理音訊播放路徑與載入
                 if (audioSrc) {
-                    modalAudio.src = audioSrc;
-                    modalAudio.parentElement.style.display = 'block';
+                    audioPlayerContainer.style.display = 'block';
+                    modalAudioSource.src = audioSrc;
                     modalAudio.load();
+                    modalAudio.play().catch(err => {
+                        console.log('Autoplay prevented by browser:', err);
+                    });
                 } else {
                     modalAudio.pause();
-                    modalAudio.src = '';
-                    modalAudio.parentElement.style.display = 'none';
+                    modalAudioSource.src = '';
+                    audioPlayerContainer.style.display = 'none';
                 }
 
                 modalOverlay.classList.add('active');
             });
         });
 
-        // 綁定收藏按鈕切換效果
+        // 收藏按鈕切換
         document.querySelectorAll('.js-bookmark').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -812,7 +979,7 @@
             });
         });
 
-        // 關閉彈窗事件
+        // 關閉 Modal 事件
         modalCloseBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal();
@@ -820,7 +987,7 @@
 
         function closeModal() {
             modalOverlay.classList.remove('active');
-            modalAudio.pause(); // 關閉彈窗時自動暫停音效
+            modalAudio.pause();
         }
     </script>
 </body>
